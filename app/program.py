@@ -5,20 +5,23 @@ from gooey import Gooey, GooeyParser
 from utils import to_project_style
 
 
-@Gooey(
-    program_name='Pyramid app builder',
-    program_description='Create a Pyramid web app')
 def main():
-    info = get_user_values()
+    print("sys.argv: {}".format(sys.argv))
+    if '--ignore-gooey' not in sys.argv:
+        info = get_user_values()
+    elif '/var/folders/' in sys.argv:
+        return
+    else:
+        info = windows_callback_args_workaround()
     proj_dir = build_app(info)
 
     print("Project created: {}".format(proj_dir))
 
 
+@Gooey(
+    program_name='Pyramid app builder',
+    program_description='Create a Pyramid web app')
 def get_user_values():
-    if sys.platform == 'Windows' and '--ignore-gooey' in sys.argv:
-        return windows_callback_args_workaround()
-
     parser = GooeyParser()
     parser.add_argument(dest='template',
                         metavar='Project type',
@@ -98,6 +101,7 @@ def build_app(info):
     )
 
     return proj_dir
+
 
 class Args:
     pass
