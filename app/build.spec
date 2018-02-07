@@ -4,7 +4,7 @@ gooey_languages = Tree(os.path.join(gooey_root, 'languages'), prefix = 'gooey/la
 gooey_images = Tree(os.path.join(gooey_root, 'images'), prefix = 'gooey/images')
 a = Analysis(['program.py'],
              pathex=['/Users/mkennedy/Desktop/gui_cookiecutter_app/.env/bin/python'],
-             hiddenimports=[],
+             hiddenimports=['cookiecutter.extensions', 'jinja2_time'],
              hookspath=None,
              runtime_hooks=None,
              )
