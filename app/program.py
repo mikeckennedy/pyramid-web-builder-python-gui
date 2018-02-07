@@ -7,7 +7,8 @@ from utils import to_project_style
 
 def main():
     print("sys.argv: {}".format(sys.argv))
-    if len(sys.argv) == 2 and '/var/folders/' in sys.argv[1]:
+    if len(sys.argv) == 2 and ('/var/folders/' in sys.argv[1]
+                               or 'AppData\\' in sys.argv[1]):
         return
     elif '--ignore-gooey' not in sys.argv:
         info = get_user_values()
