@@ -1,4 +1,5 @@
 import cookiecutter.main
+import sys
 from gooey import Gooey, GooeyParser
 
 from utils import to_project_style
@@ -15,6 +16,9 @@ def main():
 
 
 def get_user_values():
+    if sys.platform == 'Windows' and '--ignore-gooey' in sys.argv:
+        return windows_callback_args_workaround()
+
     parser = GooeyParser()
     parser.add_argument(dest='template',
                         metavar='Project type',
@@ -34,7 +38,23 @@ def get_user_values():
         metavar='Output directory',
         help='Directory for project',
         widget="DirChooser")
+
     args = parser.parse_args()
+    return args
+
+
+def windows_callback_args_workaround():
+    if len(sys.argv) != 6:
+        return Args()
+
+    # second callback args:
+    # exe  --ignore-gooey "Starter" "test3" "chameleon" "C:\Users\mkennedy\Desktop"
+    args = Args()
+    args.template = sys.argv[2]
+    args.project_name = sys.argv[3]
+    args.template_language = sys.argv[4]
+    args.working_dir = sys.argv[5]
+
     return args
 
 
@@ -78,6 +98,9 @@ def build_app(info):
     )
 
     return proj_dir
+
+class Args:
+    pass
 
 
 if __name__ == '__main__':
