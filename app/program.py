@@ -85,9 +85,5 @@ def build_app(info):
     return proj_dir
 
 
-class Args:
-    pass
-
-
 if __name__ == '__main__':
     sys.exit(main())
