@@ -10,14 +10,6 @@ from utils import to_project_style
     program_description='Create a Pyramid web app')
 def main():
     info = get_user_values()
-    # print("sys.argv: {}".format(sys.argv))
-    # if len(sys.argv) == 2 and ('/var/folders/' in sys.argv[1]
-    #                            or 'AppData\\' in sys.argv[1]):
-    #     return
-    # elif '--ignore-gooey' not in sys.argv:
-    #     info = get_user_values()
-    # else:
-    #     info = windows_callback_args_workaround()
     proj_dir = build_app(info)
 
     print("Project created: {}".format(proj_dir))
@@ -44,22 +36,8 @@ def get_user_values():
         help='Directory for project',
         widget="DirChooser")
 
-    args = parser.parse_args(sys.argv[1:])
-    return args
-
-
-def windows_callback_args_workaround():
-    if len(sys.argv) != 6:
-        return Args()
-
-    # second callback args:
-    # exe  --ignore-gooey "Starter" "test3" "chameleon" "C:\Users\mkennedy\Desktop"
-    args = Args()
-    args.template = sys.argv[2]
-    args.project_name = sys.argv[3]
-    args.template_language = sys.argv[4]
-    args.working_dir = sys.argv[5]
-
+    sysargs = sys.argv[1:]
+    args = parser.parse_args(sysargs)
     return args
 
 
@@ -110,4 +88,4 @@ class Args:
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
