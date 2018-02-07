@@ -2,8 +2,10 @@ import gooey
 gooey_root = os.path.dirname(gooey.__file__)
 gooey_languages = Tree(os.path.join(gooey_root, 'languages'), prefix = 'gooey/languages')
 gooey_images = Tree(os.path.join(gooey_root, 'images'), prefix = 'gooey/images')
-a = Analysis(['bootstrapper.py', 'program.py'],
-             pathex=['/Users/mkennedy/Desktop/gui_cookiecutter_app/.env/bin/python'],
+
+ex_path = os.path.join(os.getcwd(), 'bootstrapper.py')
+a = Analysis(['program.py'],
+             pathex=[],
              hiddenimports=['cookiecutter', 'gooey', 'cookiecutter.extensions', 'jinja2_time'],
              hookspath=None,
              runtime_hooks=None,
