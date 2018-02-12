@@ -10,7 +10,6 @@ from utils import to_project_style
     program_description='Create a Pyramid web app',
     show_success_modal=False)
 def main():
-    print(sys.argv)
     info = get_user_values()
     proj_dir = build_app(info)
 
